@@ -19,6 +19,9 @@ class Board:
         self.checked = False
         self.list_of_checking_trajectories = []
 
+        # Game State for edge-situations
+        self.state = None
+
         # List of squares containing pieces protected by other pieces
         self.protected_squares_white = []
         self.protected_squares_black = []
@@ -169,11 +172,15 @@ class Board:
 
     def valid_pawn_movements(self, start):
         # Calculates valid pawn movements
+        if start.row==1 or start.row ==8:
+            self.state = 'PROMOTE'
+            return []
+
         valid_squares = []
         front = None
         if start.piece.piece_color == 'White':
             front = self.get_square(start.column, start.row + 1)
-            if not front.has_piece():
+            if front is not None and not front.has_piece():
                 valid_squares.append(front)
                 if len(start.piece.past_moves) == 0:
                     double_start = self.get_square(start.column, start.row + 2)
@@ -182,7 +189,7 @@ class Board:
 
         elif start.piece.piece_color == 'Black':
             front = self.get_square(start.column, start.row - 1)
-            if not front.has_piece():
+            if front is not None and not front.has_piece():
                 valid_squares.append(front)
                 if len(start.piece.past_moves) == 0:
                     double_start = self.get_square(start.column, start.row - 2)
