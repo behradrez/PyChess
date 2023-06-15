@@ -68,27 +68,3 @@ class ChessSquare:
                 if square.piece.type == 'King':
                     return True
         return False
-
-
-
-if __name__ == "__main__":
-
-    list_of_squares = []
-    pygame.init()
-    screen = pygame.display.set_mode((500, 500))
-    for j in range(1, 9):
-        for i in range(1, 9):
-            Black_Square = ChessSquare(i, j)
-            print(type(Black_Square.get_pos()))
-            list_of_squares.append(Black_Square)
-    while True:
-        screen.fill('Brown')
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-        for square in list_of_squares:
-            square.draw_square(screen)
-            square.check_click()
-
-        pygame.display.flip()

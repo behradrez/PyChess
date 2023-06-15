@@ -20,8 +20,7 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        if event.type == pygame.KEYDOWN:
-            print("qqqqq")
+
 
     screen.fill("Brown")
     board.draw_board(screen)

@@ -81,7 +81,6 @@ class Board:
         for square in self.squares:
             if square.check_click():
                 if square.piece.piece_color == self.turn:
-                    print(square.valid_moves)
                     square.color = 'Blue'
                 return square
 
@@ -452,11 +451,9 @@ class Board:
             left_king_spot = self.get_square(3, row)
             left_rook_spot = self.get_square(4, row)
             current_left_rook = self.get_square(1,row)
-            print("First")
             if len(current_left_rook.piece.past_moves) == 0 \
                     and not left_king_spot.has_piece() and not left_rook_spot.has_piece() \
                     and not self.get_square(4, row).has_piece():
-                print("first firsr")
                 valid_castle.append((king_spot,left_king_spot, current_left_rook,left_rook_spot))
                 left_king_spot.color = 'Green'
             right_king_spot = self.get_square(7, row)
@@ -466,7 +463,6 @@ class Board:
                     and not right_rook_spot.has_piece() and not right_king_spot.has_piece():
                 valid_castle.append((king_spot,right_king_spot, current_right_rook, right_rook_spot))
                 right_king_spot.color = 'Green'
-                print("here")
         return valid_castle
 
     def is_game_over(self):
